@@ -1,0 +1,58 @@
+﻿@model MagazinComponenteAuto.Models.ShoppingCartModels
+
+@{
+    ViewBag.Title = "DetailsShoppingCart";
+}
+
+<h2>DetailsShoppingCart</h2>
+
+<div>
+    <h4>ShoppingCartModels</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ShoppingCartID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShoppingCartID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCodeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductCodeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

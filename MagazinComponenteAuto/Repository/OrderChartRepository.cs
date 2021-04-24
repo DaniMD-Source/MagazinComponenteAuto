@@ -79,5 +79,29 @@ namespace MagazinComponenteAuto.Repository
                 dbContext.SubmitChanges();
             }
         }
+        public int LastOrder()
+        {
+            OrderChart orderChart = dbContext.OrderCharts.OrderByDescending(x => x.OrderChartID).FirstOrDefault();
+            if (orderChart != null)
+            {
+                return MapDbObjectsToModel(orderChart).OrderChartID+1;
+            }
+            return 1;       
+        }
+        public OrderChartModels GetOrderChartByID(int ID)
+        {
+            var orderChart = dbContext.OrderCharts.FirstOrDefault(x => x.OrderChartID == ID);
+
+            return MapDbObjectsToModel(orderChart);
+        }
+        public List<OrderChartModels> GetAllShoppingCart()
+        {
+            List<OrderChartModels> orderChartList = new List<OrderChartModels>();
+            foreach (OrderChart dbOrderChart in dbContext.OrderCharts)
+            {
+                orderChartList.Add(MapDbObjectsToModel(dbOrderChart));
+            }
+            return orderChartList;
+        }
     }
 }

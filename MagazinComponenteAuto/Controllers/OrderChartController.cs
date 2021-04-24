@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MagazinComponenteAuto.Models;
+using MagazinComponenteAuto.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,8 @@ namespace MagazinComponenteAuto.Controllers
 {
     public class OrderChartController : Controller
     {
+        private OrderChartRepository orderChartRepository = new OrderChartRepository();
+        private ShoppingCartRepository shoppingCartRepository = new ShoppingCartRepository();
         // GET: OrderChart
         public ActionResult Index()
         {
@@ -23,7 +27,7 @@ namespace MagazinComponenteAuto.Controllers
         // GET: OrderChart/Create
         public ActionResult Create()
         {
-            return View();
+            return View("CreateOrderChart");
         }
 
         // POST: OrderChart/Create
@@ -32,13 +36,19 @@ namespace MagazinComponenteAuto.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                OrderChartModels orderchartModel = new OrderChartModels();
+                UpdateModel(orderchartModel);
+                orderchartModel.Date = DateTime.UtcNow;
+                orderchartModel.TotalPrice = shoppingCartRepository.TotalPrice();
+                orderchartModel.ShoppingCartID = shoppingCartRepository.LastShoppingCartOrderID();
+                orderchartModel.ClientID = new Guid();
+                orderChartRepository.InsertOrderChart(orderchartModel);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("CreateOrderChart");
             }
         }
 

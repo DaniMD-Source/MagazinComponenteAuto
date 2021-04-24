@@ -35,7 +35,7 @@
   </Table>
   <Table Name="dbo.ShoppingCart" Member="ShoppingCarts">
     <Type Name="ShoppingCart">
-      <Column Name="ShoppingCartID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ShoppingCartID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ProductCodeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />

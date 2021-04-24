@@ -47,9 +47,10 @@
             @Html.DisplayFor(modelItem => item.ImageName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new {  id=item.ProductCode  }) |
-            @Html.ActionLink("Details", "Details", new {  id=item.ProductCode }) |
-            @Html.ActionLink("Delete", "Delete", new {  id=item.ProductCode })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProductCode }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ProductCode }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProductCode }) |
+            @Html.ActionLink("Add to cart", "Create", "ShoppingCart", new { id = item.ProductCode }, null)
         </td>
     </tr>
 }

@@ -67,7 +67,7 @@ namespace MagazinComponenteAuto.Repository
                 dbContext.SubmitChanges();
             }
         }
-        public void DeleteProduct(int id)
+        public void DeleteShoppingCart(int id)
         {
             ShoppingCart dbShoppingCart = dbContext.ShoppingCarts.FirstOrDefault(x => x.ShoppingCartID == id);
             if (dbShoppingCart != null)
@@ -76,5 +76,36 @@ namespace MagazinComponenteAuto.Repository
                 dbContext.SubmitChanges();
             }
         }
+        public ShoppingCartModels GetShoppingCartByID(int ID)
+        {
+            var shoppingCart = dbContext.ShoppingCarts.FirstOrDefault(x => x.ShoppingCartID == ID);
+
+            return MapDbObjectsToModel(shoppingCart);
+        }
+        public List<ShoppingCartModels> GetAllShoppingCart()
+        {
+            List<ShoppingCartModels> shoppingCartList = new List<ShoppingCartModels>();
+            foreach (ShoppingCart dbShoppingCart in dbContext.ShoppingCarts)
+            {
+                shoppingCartList.Add(MapDbObjectsToModel(dbShoppingCart));
+            }
+            return shoppingCartList;
+        }
+        public decimal TotalPrice()
+        {
+            decimal total = 0;
+            foreach (var item in dbContext.ShoppingCarts.Where(x => x.OrderID == LastShoppingCartOrderID()))
+                {
+                total = total + item.Price;
+                }
+            return total;
+        }
+
+        public int LastShoppingCartOrderID()
+        {
+            ShoppingCart shoppingCart = dbContext.ShoppingCarts.OrderByDescending(x => x.ShoppingCartID).FirstOrDefault();
+            return shoppingCart.OrderID;
+        }
+        
     }
 }
